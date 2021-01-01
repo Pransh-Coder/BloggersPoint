@@ -56,15 +56,34 @@ public class NetworkingCalls {
         dialog.setTitle("Getting Blogs..");
         dialog.show();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, baseUrl.getGET_BLOGS(), new Response.Listener<String>() {
+        Log.e("getBlogs_URL", ""+baseUrl.getGET_BLOGS()+"4" );
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, baseUrl.getGET_BLOGS()+"4", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                dialog.dismiss();
                 Log.e("onResponseGetBlogs", "" + response);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.getString("status").equalsIgnoreCase("true")) {
+                        GsonBuilder builder = new GsonBuilder();
+                        Gson gson = builder.create();
+                        Type listType = new TypeToken<List<BlogsPojo>>(){}.getType();
+                        ArrayList<BlogsPojo> blogsPojoList = gson.fromJson(String.valueOf(jsonObject.getJSONArray("data")), listType);
+
+                        DashboardFragment.blogsViewModel.getBlogsLiveData().setValue(blogsPojoList);
+                    }
+                } catch (Exception e) {
+                    dialog.dismiss();
+                    Log.e("exception",e.getMessage());
+                    e.printStackTrace();
+                }
+
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                dialog.dismiss();
+                Log.e("onErrorResGetBlogs", ""+error);
             }
         });
         requestQueue.add(stringRequest);

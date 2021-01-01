@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.customer.bloggerspoint.R;
 import com.customer.bloggerspoint.adapter.RecyclerAdapterBlog;
+import com.customer.bloggerspoint.networkingStructure.NetworkingCalls;
 import com.customer.bloggerspoint.pojo.BlogsPojo;
 import com.customer.bloggerspoint.sharePrefs.SharePrefs;
 import com.customer.bloggerspoint.viewModel.BlogsViewModel;
@@ -41,6 +42,7 @@ public class DashboardFragment extends Fragment {
     RecyclerView.LayoutManager layoutManager;
     public static BlogsViewModel blogsViewModel;
     SwipeRefreshLayout swipeRefreshLayout;
+    NetworkingCalls networkingCalls;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,9 +61,12 @@ public class DashboardFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         sharePrefs = new SharePrefs(getContext());
+        networkingCalls = new NetworkingCalls(getContext(),getActivity());
         view1 = view;
 
         blogsViewModel = new ViewModelProvider(this).get(BlogsViewModel.class);
+
+        networkingCalls.getBlogs();
 
         Observer<ArrayList<BlogsPojo>> arrayListObserver = new Observer<ArrayList<BlogsPojo>>() {
             @Override
@@ -78,7 +83,8 @@ public class DashboardFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
+                networkingCalls.getBlogs();
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
 
