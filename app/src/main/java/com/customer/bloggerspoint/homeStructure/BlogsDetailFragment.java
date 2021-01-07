@@ -17,6 +17,7 @@ import com.customer.bloggerspoint.R;
 public class BlogsDetailFragment extends Fragment {
 
     TextView tv_title,tv_description,tv_authorName;
+    String title,description,authName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,7 +34,16 @@ public class BlogsDetailFragment extends Fragment {
         tv_description = view.findViewById(R.id.description);
         tv_authorName = view.findViewById(R.id.authorName);
 
+        if (getArguments() != null) {
 
+            title = getArguments().getString("title","");
+            description = getArguments().getString("description","");
+            authName = getArguments().getString("name","");
+
+            tv_title.setText(title);
+            tv_description.setText(description);
+            tv_authorName.setText(authName);
+        }
 
     }
 }

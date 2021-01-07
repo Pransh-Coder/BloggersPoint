@@ -20,6 +20,12 @@ public class BlogsPojo {
     @SerializedName("Date")
     @Expose
     public String date;
+    @SerializedName("Name")
+    @Expose
+    public String name;
+    @SerializedName("Email")
+    @Expose
+    public String email;
 
     public String getTitle() {
         return title;
@@ -59,5 +65,21 @@ public class BlogsPojo {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

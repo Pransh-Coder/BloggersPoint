@@ -30,16 +30,24 @@ public class SharePrefs {
         getUserPreference().edit().putBoolean("loggedin",b).apply();
     }
 
-    public String getFirName(){
-        return getUserPreference().getString("first_name","");
+    public String getName(){
+        return getUserPreference().getString("name","");
     }
-    public void setFirName(String firstName){
-        getUserPreference().edit().putString("first_name",firstName).apply();
+    public void setName(String name){
+        getUserPreference().edit().putString("name",name).apply();
     }
-    public String getLasName(){
-        return getUserPreference().getString("last_name","");
+
+    public String getEmail(){
+        return getUserPreference().getString("email_id","");
     }
-    public void setLasName(String lastName){
-        getUserPreference().edit().putString("last_name",lastName).apply();
+    public void setEmail(String email){
+        getUserPreference().edit().putString("email_id",email).apply();
     }
+    public String getId(){
+        return getUserPreference().getString("user_id","");
+    }
+    public void setId(String id){
+        getUserPreference().edit().putString("user_id",id).apply();
+    }
+
 }

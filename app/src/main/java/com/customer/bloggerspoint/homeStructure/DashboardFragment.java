@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.customer.bloggerspoint.R;
@@ -38,6 +39,7 @@ public class DashboardFragment extends Fragment {
     FloatingActionButton addBlog;
     SharePrefs sharePrefs;
     View view1;
+    TextView name;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     public static BlogsViewModel blogsViewModel;
@@ -57,12 +59,15 @@ public class DashboardFragment extends Fragment {
 
         addBlog = view.findViewById(R.id.addBlog);
         recyclerView = view.findViewById(R.id.recyclerView);
+        name = view.findViewById(R.id.name);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         sharePrefs = new SharePrefs(getContext());
         networkingCalls = new NetworkingCalls(getContext(),getActivity());
         view1 = view;
+
+        name.setText("Hello! "+sharePrefs.getName());
 
         blogsViewModel = new ViewModelProvider(this).get(BlogsViewModel.class);
 

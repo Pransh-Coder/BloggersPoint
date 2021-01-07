@@ -52,6 +52,9 @@
         <action
             android:id="@+id/action_dashboardFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_blogsDetailFragment"
+            app:destination="@id/blogsDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/postBlogFragment"
@@ -62,4 +65,9 @@
             android:id="@+id/action_postBlogFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/blogsDetailFragment"
+        android:name="com.customer.bloggerspoint.homeStructure.BlogsDetailFragment"
+        android:label="fragment_blogs_detail"
+        tools:layout="@layout/fragment_blogs_detail" />
 </navigation>

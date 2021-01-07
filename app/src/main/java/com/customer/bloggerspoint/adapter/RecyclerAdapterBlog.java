@@ -2,6 +2,7 @@ package com.customer.bloggerspoint.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.customer.bloggerspoint.R;
@@ -42,6 +44,17 @@ public class RecyclerAdapterBlog extends RecyclerView.Adapter<RecyclerAdapterBlo
 
         holder.title.setText(blogsPojosList.get(position).getTitle());
         holder.description.setText(blogsPojosList.get(position).getDescription());
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("title",blogsPojosList.get(position).getTitle());
+                bundle.putString("description",blogsPojosList.get(position).getDescription());
+                bundle.putString("name",blogsPojosList.get(position).getName());
+                Navigation.findNavController(view).navigate(R.id.action_dashboardFragment_to_blogsDetailFragment,bundle);
+            }
+        });
     }
 
     @Override

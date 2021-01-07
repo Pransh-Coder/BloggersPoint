@@ -7,6 +7,6 @@ public interface NetworkingInterface {
     <T> void networkingRequestPerformed(@Nullable MethodType type, boolean status, @Nullable T error);
 
     enum MethodType {
-        postBlog
+        signup,login,add_blog;
     }
 }
