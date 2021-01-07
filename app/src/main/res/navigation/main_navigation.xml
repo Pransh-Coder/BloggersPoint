@@ -12,10 +12,14 @@
         tools:layout="@layout/fragment_splash_screen" >
         <action
             android:id="@+id/action_splashScreenFragment_to_signupFragment"
-            app:destination="@id/signupFragment" />
+            app:destination="@id/signupFragment"
+            app:popUpTo="@id/splashScreenFragment"
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_splashScreenFragment_to_dashboardFragment"
-            app:destination="@id/dashboardFragment" />
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@id/splashScreenFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
@@ -64,10 +68,17 @@
         <action
             android:id="@+id/action_postBlogFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />
+        <action
+            android:id="@+id/action_postBlogFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/blogsDetailFragment"
         android:name="com.customer.bloggerspoint.homeStructure.BlogsDetailFragment"
         android:label="fragment_blogs_detail"
-        tools:layout="@layout/fragment_blogs_detail" />
+        tools:layout="@layout/fragment_blogs_detail" >
+        <action
+            android:id="@+id/action_blogsDetailFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>

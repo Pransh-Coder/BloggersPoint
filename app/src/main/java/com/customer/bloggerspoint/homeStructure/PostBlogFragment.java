@@ -1,5 +1,7 @@
 package com.customer.bloggerspoint.homeStructure;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 import com.customer.bloggerspoint.R;
 import com.customer.bloggerspoint.networkingStructure.NetworkingCalls;
 import com.customer.bloggerspoint.networkingStructure.NetworkingInterface;
+import com.customer.bloggerspoint.sharePrefs.SharePrefs;
 
 
 public class PostBlogFragment extends Fragment implements NetworkingInterface {
@@ -25,6 +28,7 @@ public class PostBlogFragment extends Fragment implements NetworkingInterface {
     Button submit;
     View view1;
     NetworkingCalls networkingCalls;
+    SharePrefs sharePrefs;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,6 +45,7 @@ public class PostBlogFragment extends Fragment implements NetworkingInterface {
         enterDescription = view.findViewById(R.id.enterDescription);
         networkingCalls = new NetworkingCalls(getContext(),getActivity(),this);
         submit = view.findViewById(R.id.submit);
+        sharePrefs = new SharePrefs(getContext());
         view1 = view;
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +54,37 @@ public class PostBlogFragment extends Fragment implements NetworkingInterface {
                 if (checkInput()){
                     networkingCalls.addBlog(enterTitle.getText().toString(),enterDescription.getText().toString());
                 }
+            }
+        });
+
+        getActivity().findViewById(R.id.logout).setVisibility(View.VISIBLE);
+        getActivity().findViewById(R.id.logout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
+                builder1.setMessage("Do you wan't to logout?");
+                builder1.setCancelable(true);
+
+                builder1.setPositiveButton(
+                        "Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                sharePrefs.removeAllSP();
+                                Navigation.findNavController(view1).navigate(R.id.action_postBlogFragment_to_loginFragment);
+                            }
+                        });
+
+                builder1.setNegativeButton(
+                        "No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
             }
         });
 
