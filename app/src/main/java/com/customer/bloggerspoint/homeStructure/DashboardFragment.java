@@ -15,11 +15,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +48,8 @@ public class DashboardFragment extends Fragment {
     public static BlogsViewModel blogsViewModel;
     SwipeRefreshLayout swipeRefreshLayout;
     NetworkingCalls networkingCalls;
+    EditText search;
+    RecyclerAdapterBlog recyclerAdapterBlog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,6 +65,7 @@ public class DashboardFragment extends Fragment {
         addBlog = view.findViewById(R.id.addBlog);
         recyclerView = view.findViewById(R.id.recyclerView);
         name = view.findViewById(R.id.name);
+        search = view.findViewById(R.id.search);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -73,11 +79,27 @@ public class DashboardFragment extends Fragment {
 
         networkingCalls.getBlogs();
 
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                recyclerAdapterBlog.getFilter().filter(editable);
+            }
+        });
+
         Observer<ArrayList<BlogsPojo>> arrayListObserver = new Observer<ArrayList<BlogsPojo>>() {
             @Override
             public void onChanged(ArrayList<BlogsPojo> blogsViewModels) {
 
-                RecyclerAdapterBlog recyclerAdapterBlog = new RecyclerAdapterBlog(getContext(),blogsViewModels,getActivity());
+                recyclerAdapterBlog = new RecyclerAdapterBlog(getContext(),blogsViewModels,getActivity());
                 recyclerView.setAdapter(recyclerAdapterBlog);
             }
         };

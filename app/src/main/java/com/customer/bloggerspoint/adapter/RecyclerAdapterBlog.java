@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,17 +20,19 @@ import com.customer.bloggerspoint.R;
 import com.customer.bloggerspoint.pojo.BlogsPojo;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class RecyclerAdapterBlog extends RecyclerView.Adapter<RecyclerAdapterBlog.ViewHolder> {
+public class RecyclerAdapterBlog extends RecyclerView.Adapter<RecyclerAdapterBlog.ViewHolder>  implements Filterable {
 
     Context context;
     ArrayList<BlogsPojo> blogsPojosList = new ArrayList<>();
-    private ArrayList<BlogsPojo> dataFull;
+    private ArrayList<BlogsPojo> backupList;
     Activity activity;
 
     public RecyclerAdapterBlog(Context context, ArrayList<BlogsPojo> blogsPojosList, Activity activity) {
         this.context = context;
         this.blogsPojosList = blogsPojosList;
+        backupList = new ArrayList<>(blogsPojosList);
         this.activity = activity;
     }
 
@@ -62,6 +66,11 @@ public class RecyclerAdapterBlog extends RecyclerView.Adapter<RecyclerAdapterBlo
         return blogsPojosList.size();
     }
 
+    @Override
+    public Filter getFilter() {
+        return blogsFilter;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView title,description;
@@ -76,4 +85,42 @@ public class RecyclerAdapterBlog extends RecyclerView.Adapter<RecyclerAdapterBlo
             cardView = itemView.findViewById(R.id.cardView);
         }
     }
+
+    private Filter blogsFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            List<BlogsPojo>filteredData = new ArrayList<>();
+            if (charSequence==null||charSequence.length()==0){
+                filteredData.addAll(backupList);
+            }
+            else {
+                String filterPattern = charSequence.toString().toLowerCase().trim();
+                for (BlogsPojo item : backupList)
+                {
+                    if (item.getTitle().toLowerCase().startsWith(filterPattern))
+                    {
+                        filteredData.add(item);
+
+                    }
+                    else if (item.getDescription().toLowerCase().contains(filterPattern))
+                    {
+                        filteredData.add(item);
+                    }
+                    else {
+
+                    }
+                }
+            }
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredData;
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            blogsPojosList.clear();
+            blogsPojosList.addAll((List) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
 }
