@@ -50,7 +50,7 @@ public class BlogsDetailFragment extends Fragment {
 
             tv_title.setText(title);
             tv_description.setText(description);
-            tv_authorName.setText(authName);
+            tv_authorName.setText("By: "+authName);
         }
 
         getActivity().findViewById(R.id.logout).setVisibility(View.VISIBLE);
