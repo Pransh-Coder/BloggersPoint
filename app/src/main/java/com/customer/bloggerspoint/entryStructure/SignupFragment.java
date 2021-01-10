@@ -88,7 +88,7 @@ public class SignupFragment extends Fragment implements NetworkingInterface {
     @Override
     public <T> void networkingRequestPerformed(@Nullable MethodType type, boolean status, @Nullable T error) {
         if (type==MethodType.signup&&status){
-            Navigation.findNavController(view1).navigate(R.id.action_signupFragment_to_dashboardFragment);
+            Navigation.findNavController(view1).navigate(R.id.action_signupFragment_to_loginFragment);
         }
         else if (type==MethodType.signup&&!status){
             Toast.makeText(getContext(), ""+error, Toast.LENGTH_SHORT).show();

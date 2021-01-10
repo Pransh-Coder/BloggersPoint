@@ -17,6 +17,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -73,6 +74,7 @@ public class DashboardFragment extends Fragment {
         networkingCalls = new NetworkingCalls(getContext(),getActivity());
         view1 = view;
 
+        Log.e("name", ""+sharePrefs.getName());
         name.setText("Hello! "+sharePrefs.getName());
 
         blogsViewModel = new ViewModelProvider(this).get(BlogsViewModel.class);

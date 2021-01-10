@@ -119,7 +119,6 @@ public class NetworkingCalls {
 
                         networkingInterface.networkingRequestPerformed(NetworkingInterface.MethodType.signup,true,null);
 
-
                         Log.e("SignupData",user_id);
 
                         sharePrefs.setLoggedIn(true);
