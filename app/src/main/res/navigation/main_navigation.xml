@@ -14,11 +14,13 @@
             android:id="@+id/action_splashScreenFragment_to_signupFragment"
             app:destination="@id/signupFragment"
             app:popUpTo="@id/splashScreenFragment"
+            app:enterAnim="@anim/fade_in"
             app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_splashScreenFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment"
             app:popUpTo="@id/splashScreenFragment"
+            app:enterAnim="@anim/fade_in"
             app:popUpToInclusive="true"/>
     </fragment>
     <fragment
@@ -28,10 +30,14 @@
         tools:layout="@layout/fragment_signup" >
         <action
             android:id="@+id/action_signupFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"/>
         <action
             android:id="@+id/action_signupFragment_to_dashboardFragment"
-            app:destination="@id/dashboardFragment" />
+            app:destination="@id/dashboardFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"/>
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -40,10 +46,14 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_signupFragment"
-            app:destination="@id/signupFragment" />
+            app:destination="@id/signupFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"/>
         <action
             android:id="@+id/action_loginFragment_to_dashboardFragment"
-            app:destination="@id/dashboardFragment" />
+            app:destination="@id/dashboardFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"/>
     </fragment>
     <fragment
         android:id="@+id/dashboardFragment"
@@ -52,13 +62,19 @@
         tools:layout="@layout/fragment_dashboard" >
         <action
             android:id="@+id/action_dashboardFragment_to_postBlogFragment"
-            app:destination="@id/postBlogFragment" />
+            app:destination="@id/postBlogFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"/>
         <action
             android:id="@+id/action_dashboardFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"/>
         <action
             android:id="@+id/action_dashboardFragment_to_blogsDetailFragment"
-            app:destination="@id/blogsDetailFragment" />
+            app:destination="@id/blogsDetailFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"/>
     </fragment>
     <fragment
         android:id="@+id/postBlogFragment"
@@ -67,10 +83,14 @@
         tools:layout="@layout/fragment_post_blog" >
         <action
             android:id="@+id/action_postBlogFragment_to_dashboardFragment"
-            app:destination="@id/dashboardFragment" />
+            app:destination="@id/dashboardFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"/>
         <action
             android:id="@+id/action_postBlogFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"/>
     </fragment>
     <fragment
         android:id="@+id/blogsDetailFragment"
@@ -79,6 +99,8 @@
         tools:layout="@layout/fragment_blogs_detail" >
         <action
             android:id="@+id/action_blogsDetailFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"/>
     </fragment>
 </navigation>
